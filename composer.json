@@ -1,0 +1,13 @@
+{
+    "name": "JorgeAndCo/HW4DataSheets",
+    "description": "Homework 4 for CS174",
+    "authors": [
+        {
+            "name": "Jorge Aguiniga",
+            "email": "jorge.aguiniga94@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": ">=1.0"
+    }
+}
