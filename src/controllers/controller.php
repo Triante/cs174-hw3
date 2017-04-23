@@ -14,7 +14,7 @@ class Controller
 		$model = new MODEL\Model();
 	}
 	
-	public function manage($code)
+	public function views($code)
 	{
 		$data = manageRead($code);
 		
