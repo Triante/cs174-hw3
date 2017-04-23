@@ -1,0 +1,6 @@
+Title: Change Require Once Function in index.php
+Member: Jorge Aguiniga
+Description:
+	Make sure that the require_once in
+	the index.php file refers to the
+	autoloader from Composer.
