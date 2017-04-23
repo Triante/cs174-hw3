@@ -19,6 +19,12 @@ class EditSheetView {
     function render($data) {
         $this->head->render()
         ?>
+		var json = "<?php echo json_encode($data['json']); ?>";
+		var obj = JSON.parse(json);
+		var spreadsheet2 = new Spreadsheet("spreadsheet_edit",
+		[["john"],["carry"]], {"mode":"write"}); //editable
+		spreadsheet2.draw();
+		</script>
         <body>
             <h1><a href="index.php">Web Sheets</a><?= $data['title'] ?></h1>
             <div>
@@ -34,12 +40,6 @@ class EditSheetView {
                 <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_f"/>
             </div>
             <div id="spreadsheet_edit"></div>
-            <script>
-				var json = "<?= $data['json']?>";
-                spreadsheet2 = new Spreadsheet("spreadsheet_edit",
-                json, {"mode":"write"}); //editable
-                spreadsheet2.draw();
-            </script>
         </body>
         <?php
         $this->footer->render();

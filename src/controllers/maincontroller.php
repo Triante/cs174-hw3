@@ -24,7 +24,8 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-					$data = $this->model->read($code['sheet']);
+					//$data = $this->model->read($code['sheet']);
+					$data['type'] = "edit";
 					if (!empty($data))
 					{
 						switch($data['type'])
@@ -54,7 +55,6 @@ class MainController
 		{
 
 		}
-		$data = $model.read($code);
 
 	}
 
