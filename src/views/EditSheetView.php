@@ -11,7 +11,7 @@ class EditSheetView {
     private $footer;
 
     function __construct() {
-        $this->head = new LYOT\Header(true, "src//resources//spreadsheet.js");
+        $this->head = new LYOT\Header(true, "src/resources/spreadsheet.js");
         $this->footer = new LYOT\Footer();
     }
 
@@ -19,13 +19,7 @@ class EditSheetView {
     function render($data) {
         $this->head->render()
         ?>
-		var json = "<?php echo json_encode($data['json']); ?>";
-		var obj = JSON.parse(json);
-		var spreadsheet2 = new Spreadsheet("spreadsheet_edit",
-		[["john"],["carry"]], {"mode":"write"}); //editable
-		spreadsheet2.draw();
-		</script>
-        <body>
+		<body>
             <h1><a href="index.php">Web Sheets</a><?= $data['title'] ?></h1>
             <div>
                 <label for="edit_url">Edit URL:</label>
@@ -40,6 +34,13 @@ class EditSheetView {
                 <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_f"/>
             </div>
             <div id="spreadsheet_edit"></div>
+			<script>
+				var json_string = '<?php echo json_encode($data['json']) ?>';
+				var json_array = eval('(' + json + ')');
+				var spreadsheet2 = new Spreadsheet("spreadsheet_edit",
+				json_array, {"mode":"write"}); //editable
+				spreadsheet2.draw();
+			</script>
         </body>
         <?php
         $this->footer->render();

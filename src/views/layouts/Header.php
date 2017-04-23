@@ -25,13 +25,14 @@ class Header
             <!doctype html>
             <html>
                 <head>
-                    <title>CS174 HW4 Datasheets</title>                    
-                </head>
-				<?php
+                    <title>CS174 HW4 Datasheets</title>
+                    <?php
                         if ($this->hasScript) {
-                            ?><script type="text/javascript" src="<?= $this->scriptLoc ?>"><?php
+                            ?><script type="text/javascript" src="<?= $this->scriptLoc ?>"></script><?php
                         }
-                ?>
+                    ?>
+
+                </head>
         <?php
     }
 }

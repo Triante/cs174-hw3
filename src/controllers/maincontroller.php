@@ -67,6 +67,7 @@ class MainController
 	private function sheetView($data)
 	{
 		$this->view = new VIEW\ReadSheetView();
+		$this->view->render();
 	}
 
 	private function xmlView($data)
