@@ -5,8 +5,8 @@
 */
 namespace jorgeandco\hw4;
 
-require_once('src//views//LandingView.php');
+require_once('src//views//EditSheet.php');
 use jorgeandco\hw4\views as CTV;
 
-$class = new CTV\LandingView();
+$class = new CTV\EditSheet();
 $class->render();

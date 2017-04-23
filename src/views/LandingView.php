@@ -12,7 +12,7 @@ class LandingView {
     private $footer;
 
     function __construct() {
-        $this->head = new LYOT\Header();
+        $this->head = new LYOT\Header(false, "");
         $this->footer = new LYOT\Footer();
     }
 
