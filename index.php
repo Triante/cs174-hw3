@@ -5,8 +5,8 @@
 */
 namespace jorgeandco\hw4;
 
-require_once('src//views//EditSheet.php');
+require_once('src//views//readSheetView.php');
 use jorgeandco\hw4\views as CTV;
 
-$class = new CTV\EditSheet();
+$class = new CTV\readSheetView();
 $class->render();
