@@ -10,7 +10,7 @@ use jorgeandco\hw3 as CFG;
 *	Model class
 *	Holds data for the model
 */
-abstract class Model
+class Model
 {
 	private static $db;
 

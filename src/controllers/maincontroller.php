@@ -16,21 +16,54 @@ class MainController
 	
 	public function view($code)
 	{
-		$data = $model.read($code);
-		
-		if (!isEmpty($data))
+		if (isset($code['page']))
 		{
-			switch($data['type'])
+			switch($code['page'])
 			{
+				case "home":
+					$this->home();
+					break;
 				case "read":
-				$view = new VIEW\ReadSheetView();
-				break;
-				case "file":
+					$data = $model->read($code['sheet']);
+					if (!empty($data))
+					{
+						switch($data['type'])
+						{
+							case "read":
+								$this->sheetView($data);
+							break;
+							case "file":
+							break;
+							default:
+							
+						}
+					}
 				break;
 				default:
-				
 			}
 		}
+		else
+		{
+			
+		}
+		$data = $model.read($code);
+		
+	}
+	
+	private function home()
+	{
+		$view = new VIEW\LandingView();
+		$view->render();
+	}
+	
+	private function sheetView($data)
+	{
+		$view = new VIEW\ReadSheetView();
+	}
+	
+	private function xmlView($data)
+	{
+		
 	}
 	
 }
