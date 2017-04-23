@@ -8,12 +8,12 @@ class MainController
 {
 	private $model;
 	private $view;
-	
+
 	public function __construct()
 	{
 		$model = new MODEL\Model();
 	}
-	
+
 	public function view($code)
 	{
 		if (isset($code['page']))
@@ -35,8 +35,11 @@ class MainController
 							case "file":
 							break;
 							default:
-							
+
 						}
+					}
+					else {
+
 					}
 				break;
 				default:
@@ -44,26 +47,26 @@ class MainController
 		}
 		else
 		{
-			
+
 		}
 		$data = $model.read($code);
-		
+
 	}
-	
+
 	private function home()
 	{
 		$view = new VIEW\LandingView();
 		$view->render();
 	}
-	
+
 	private function sheetView($data)
 	{
 		$view = new VIEW\ReadSheetView();
 	}
-	
+
 	private function xmlView($data)
 	{
-		
+
 	}
-	
+
 }

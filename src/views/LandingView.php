@@ -20,10 +20,33 @@ class LandingView {
         $this->head->render()
         ?>
         <body>
+            <script type="text/javascript">
+                var reg = /^[A-Za-z\d\s]+$/ ;
+
+                function onGoClick() {
+                    var textBox = document.getElementById("sheet_search");
+                    text = textBox.value;
+                    if (verifyText(text)) {
+                        window.location.href = "index.php?index.php?c=main&m=view&arg="+text;
+                    }
+                    else {
+                        alert("Please enter alphanumerical or space characters");
+                    }
+
+                }
+
+                function verifyText (text) {
+                    if (text == "") {
+                        return false;
+                    }
+                    return reg.test(text);
+
+                }
+            </script>
             <h1><a href="index.php">Web Sheets</a></h1>
             <div>
                 <input type="text" name="sheet_search" placeholder="New sheet name or code" id="sheet_search">
-                <button id="bSheetSearch">Go</button>
+                <button id="bSheetSearch" onclick="return onGoClick();">Go</button>
             </div>
         </body>
         <?php
