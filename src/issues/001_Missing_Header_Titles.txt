@@ -4,3 +4,6 @@ Description:
 	Add a variable after the link
 	in the header for the title of
 	the edit view and read view.
+
+Discussion:
+	Jorge: No luis. This is skeleton. No variables have been added yet.
