@@ -2,9 +2,9 @@
 /**
 * @author Jorge Aguiniga, Luis Otero
 */
-namespace jorgeandco\hw3\models;
+namespace jorgeandco\hw4\models;
 
-use jorgeandco\hw3 as CFG;
+use jorgeandco\hw4 as CFG;
 
 /**
 *	Model class
