@@ -3,8 +3,7 @@
 * @author Jorge Aguiniga, Luis Otero
 */
 namespace jorgeandco\hw4\views;
-require_once ('src//views//layouts//Header.php');
-require_once ('src//views//layouts//Footer.php');
+
 use jorgeandco\hw4\views\layouts as LYOT;
 
 class EditSheetView {
