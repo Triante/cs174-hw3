@@ -4,7 +4,7 @@ namespace jorgeandco\hw4\controllers;
 use jorgeandco\hw4\models as MODEL;
 use jorgeandco\hw4\views as VIEW;
 
-class Controller
+class MainController
 {
 	private $model;
 	private $view;
@@ -14,18 +14,14 @@ class Controller
 		$model = new MODEL\Model();
 	}
 	
-	public function views($code)
+	public function view($code)
 	{
-		$data = manageRead($code);
+		$data = $model.read($code);
 		
 		if (!isEmpty($data))
 		{
 			switch($data['type'])
 			{
-				case "edit":
-				manageEdit($code, "insert");
-				$view = new VIEW\EditSheetView();
-				break;
 				case "read":
 				$view = new VIEW\ReadSheetView();
 				break;
@@ -37,14 +33,4 @@ class Controller
 		}
 	}
 	
-	private function manageRead($code)
-	{
-		return $model.read($code);
-	}
-	
-	private function manageEdit($code, $type)
-	{
-		$model.update($code, $type);
-		
-	}
 }
