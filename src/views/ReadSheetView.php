@@ -28,7 +28,7 @@ class ReadSheetView {
             </div>
             <div id="spreadsheet_edit"></div>
             <script>
-                spreadsheet2 = new Spreadsheet("spreadsheet_edit",
+                var spreadsheet2 = new Spreadsheet("spreadsheet_edit",
                 [["Tom"],["Sally"]]); //read only
                 spreadsheet2.draw();
             </script>

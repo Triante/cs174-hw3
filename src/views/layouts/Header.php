@@ -28,7 +28,7 @@ class Header
                     <title>CS174 HW4 Datasheets</title>
                     <?php
                         if ($this->hasScript) {
-                            ?><script type="text/javascript" src="<?= $this->scriptLoc ?>"> </script><?php
+                            ?><script type="text/javascript" src="<?= $this->scriptLoc ?>"></script><?php
                         }
                     ?>
 

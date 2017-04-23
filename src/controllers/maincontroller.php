@@ -24,7 +24,8 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-					$data = $this->model->read($code['sheet']);
+					//$data = $this->model->read($code['sheet']);
+					$data['type'] = "edit";
 					if (!empty($data))
 					{
 						switch($data['type'])
@@ -66,6 +67,7 @@ class MainController
 	private function sheetView($data)
 	{
 		$this->view = new VIEW\ReadSheetView();
+		$this->view->render();
 	}
 
 	private function xmlView($data)
