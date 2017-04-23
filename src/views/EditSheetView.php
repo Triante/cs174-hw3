@@ -16,11 +16,11 @@ class EditSheetView {
     }
 
 
-    function render() {
+    function render($data) {
         $this->head->render()
         ?>
         <body>
-            <h1><a href="index.php">Web Sheets</a></h1>
+            <h1><a href="index.php">Web Sheets</a><?= $data['title'] ?></h1>
             <div>
                 <label for="edit_url">Edit URL:</label>
                 <input id="edit_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_e"/>
@@ -35,8 +35,9 @@ class EditSheetView {
             </div>
             <div id="spreadsheet_edit"></div>
             <script>
+				var json = "<?= $data['json']?>";
                 spreadsheet2 = new Spreadsheet("spreadsheet_edit",
-                [["Tom"],["Sally"]], {"mode":"write"}); //editable
+                json, {"mode":"write"}); //editable
                 spreadsheet2.draw();
             </script>
         </body>

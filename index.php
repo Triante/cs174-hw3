@@ -10,7 +10,8 @@ use jorgeandco\hw4\controllers as CTV;
 
 if(isset($_REQUEST['arg1']))
 {
-	//$class = new CTV\Controller();
+	$class = new CTV\MainController();
+	$method = 'view';
 	//$method = manage;
 }
 if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))

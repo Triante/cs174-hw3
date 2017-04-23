@@ -33,6 +33,9 @@ class MainController
 								$this->sheetView($data);
 							break;
 							case "edit":
+								$bleh['title'] = "test";
+								$bleh['json'] = [["jason", "json", "JSON"], ["Java", "JS", "Javascript"]];
+								$this->editView($bleh);
 							break;
 							case "file":
 							break;
@@ -53,13 +56,13 @@ class MainController
 	
 	private function home()
 	{
-		$view = new VIEW\LandingView();
-		$view->render();
+		$this->view = new VIEW\LandingView();
+		$this->view->render();
 	}
 	
 	private function sheetView($data)
 	{
-		$view = new VIEW\ReadSheetView();
+		$this->view = new VIEW\ReadSheetView();
 	}
 	
 	private function xmlView($data)
@@ -69,7 +72,8 @@ class MainController
 	
 	private function editView($data)
 	{
-		
+		$this->view = new VIEW\EditSheetView();
+		$this->view->render($data);
 	}
 	
 }
