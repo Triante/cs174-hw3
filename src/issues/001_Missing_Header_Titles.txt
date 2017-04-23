@@ -1,0 +1,6 @@
+Title: Missing Header Titles
+Member: Jorge Aguiniga
+Description:
+	Add a variable after the link
+	in the header for the title of
+	the edit view and read view.
