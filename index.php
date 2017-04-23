@@ -16,7 +16,7 @@ if(isset($_REQUEST['arg1']))
 if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
 {
 	$class = new CTV\MainController();
-	$method = view;
+	$method = 'view';
 	$class->$method(["page"=>"home"]);
 }
 
