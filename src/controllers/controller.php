@@ -12,11 +12,39 @@ class Controller
 	public function __construct()
 	{
 		$model = new MODEL\Model();
-		$view = new VIEW\View();
 	}
 	
 	public function manage($code)
 	{
-		//code for manage function
+		$data = manageRead($code);
+		
+		if (!isEmpty($data))
+		{
+			switch($data['type'])
+			{
+				case "edit":
+				manageEdit($code, "insert");
+				$view = new VIEW\EditSheetView();
+				break;
+				case "read":
+				$view = new VIEW\ReadSheetView();
+				break;
+				case "file":
+				break;
+				default:
+				
+			}
+		}
+	}
+	
+	private function manageRead($code)
+	{
+		return $model.read($code);
+	}
+	
+	private function manageEdit($code, $type)
+	{
+		$model.update($code, $type);
+		
 	}
 }
