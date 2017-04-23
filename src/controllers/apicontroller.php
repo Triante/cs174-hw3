@@ -16,6 +16,6 @@ class ApiController
 	
 	public function updateModel($code, $type)
 	{
-		$model.updateModel($code, $type);
+		$model->updateModel($code, $type);
 	}
 }
