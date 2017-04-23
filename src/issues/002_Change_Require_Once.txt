@@ -4,3 +4,5 @@ Description:
 	Make sure that the require_once in
 	the index.php file refers to the
 	autoloader from Composer.
+Discussion:
+	Jorge: required in index was for testing views
