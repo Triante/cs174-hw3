@@ -48,16 +48,75 @@ class Model
 			echo "Could not connect!";
 		}
 	}
-	
+
 	/**
 	*	Function to read data from the database
 	*	@param array $array (the data to be processed)
 	*/
     public function read($data)
 	{
-		//to do
+		if (preg_match("/\\s/", $data)) {
+   			// there are spaces
+   			readWithName($data);
+		}
+		else {
+			$len = strlen($data);
+			if ($len == 8) {
+				$result = readWithCode($data);
+				if (empty($result)) {
+					$result = readWithName($data);
+				}
+				return $result;
+			}
+			else {
+				$result = readWithName($data);
+				return $result;
+			}
+		}
 	}
-	
+
+	private function readWithCode($data) {
+		$query = "SELECT `sheet_id`, `code_type` FROM `sheet_codes` WHERE `".$data."`= `hash_code`;";
+		if ($dbquery = self::$db->query($query)) {
+			$obj = $dbquery->fetch_object();
+			if (empty($obj->sheet_id)) {
+				return null;
+			}
+			$sheetId = $obj->sheet_id;
+			$codeType = $obj->code_type;
+			$query = "SELECT `sheet_name`, `sheet_data` FROM `sheet` WHERE `".$sheetId."`= `sheet_id`;";
+			if ($dbquery = self::$db->query($query)) {
+				$obj = $dbquery->fetch_object();
+				$sheetName = $obj->sheet_name;
+				$sheetData = $obj->sheet_data;
+				$datasheet = ["title" => $sheetName, "json" => $sheetData, "id" => $sheetId, "type" => $codeType, "code" => $data];
+				return $datasheet;
+			}
+		}
+		return null;
+	}
+
+	private function readWithName($data) {
+		$query = "SELECT `sheet_id`, `sheet_data` FROM `sheet` WHERE `".$data."` = `sheet_name`;";
+		if ($dbquery = self::$db->query($query)) {
+			$obj = $dbquery->fetch_object();
+			if (empty($obj->sheet_id)) {
+				return null;
+			}
+			$sheetId = $obj->sheet_id;
+			$sheetData = $obj->sheet_data;
+			$query = "SELECT `code_type`, `hash_code` FROM `sheet_codes` WHERE `".$sheetId."`= `sheet_id`;";
+			if ($dbquery = self::$db->query($query)) {
+				$obj = $dbquery->fetch_object();
+				$codeType = $obj->code_type;
+				$hashCode = $obj->hash_code;
+				$datasheet = ["title" => $data, "json" => $sheetData, "id" => $sheetId, "type" => $codeType, "code" => $hashCode];
+				return $datasheet;
+			}
+		}
+		return null;
+	}
+
 	/**
 	*	Function to write data to the database
 	*	@param array $array (the data to be processed)
@@ -66,7 +125,7 @@ class Model
 	{
 		//to do
 	}
-	
-	
+
+
 
 }

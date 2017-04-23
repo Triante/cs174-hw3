@@ -54,7 +54,6 @@ class MainController
 		{
 
 		}
-		$data = $model.read($code);
 
 	}
 
