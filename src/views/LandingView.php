@@ -27,19 +27,9 @@ class LandingView {
                     var textBox = document.getElementById("sheet_search");
                     text = textBox.value;
                     if (verifyText(text)) {
-						var url = "index.php?c=api&m=insert";
-						var sheet_identifier = "name=" + text;
-						var request = new XMLHttpRequest();
-						request.open("POST", url, true);
-						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-						request.onreadystatechange = function() {
-							switch(request.readyState) {
-								case 4:
-									alert(request.responseText);//window.location.href = "index.php?index.php?c=main&m=view";
-								break;
-							}
-						}
-						request.send(sheet_identifier);
+					var form = document.getElementById("set_form");
+					form.innerHTML = "<input type='hidden' name='name' value='" + text + "' />";
+					form.submit();
                     }
                     else {
                         alert("Please enter alphanumerical or space characters");
@@ -56,9 +46,10 @@ class LandingView {
                 }
             </script>
             <h1><a href="index.php">Web Sheets</a></h1>
-            <div>
+            <div id="test">
                 <input type="text" name="sheet_search" placeholder="New sheet name or code" id="sheet_search">
                 <button id="bSheetSearch" onclick="return onGoClick();">Go</button>
+				<form id="set_form" action="index.php?c=main&m=view" method="post"></form>
             </div>
         </body>
         <?php

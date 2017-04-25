@@ -23,20 +23,20 @@ class EditSheetView {
             <h1><a href="index.php">Web Sheets</a> : <?= $data['title'] ?></h1>
             <div>
                 <label for="edit_url">Edit URL:</label>
-                <input id="edit_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeE'] ?>_e"/>
+                <input id="edit_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeE'] ?>"/>
             </div>
             <div>
                 <label for="read_url">Read URL:</label>
-                <input id="read_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeR'] ?>_r"/>
+                <input id="read_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeR'] ?>"/>
             </div>
             <div>
                 <label for="file_url">File URL:</label>
-                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeF'] ?>_f"/>
+                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeF'] ?>"/>
             </div>
             <div id="spreadsheet_edit"></div>
 			<script>
 				var json_string = '<?= $data['json'] ?>';
-                var sheet_id = '<?= $data['id'] ?>';
+                var sheet_id = <?= $data['id'] ?>;
 				var json_array = JSON.parse(json_string);
 				var spreadsheet2 = new Spreadsheet(sheet_id, "spreadsheet_edit",
 				json_array, {"mode":"write"}); //editable

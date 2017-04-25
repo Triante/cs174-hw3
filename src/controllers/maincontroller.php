@@ -24,11 +24,11 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-						$code['sheet'] = "12345671";
+						//$code['sheet'] = "test";
 						$data = $this->model->read($code['sheet']);
 
-						#$bleh['title'] = "test";
-						#$bleh['json'] = '[["10", "3", "=(A1+A1)"], ["Java", "JS", "Javascript"]]';
+					if (!empty($data))
+					{
 						$bleh['title'] = $data['title'];
 						$bleh['json'] = $data['json'];
 						$bleh['id'] = $data['id'];
@@ -36,16 +36,12 @@ class MainController
 						$bleh['codeR'] = $data['codeR'];
 						$bleh['codeE'] = $data['codeE'];
 						$bleh['codeF'] = $data['codeF'];
-
-					if (!empty($data))
-					{
 						switch($bleh['type'])
 						{
 							case "r":
 								$this->sheetView($bleh);
 							break;
 							case "e":
-								echo '<script>console.log("Enters Edit")</script>';
 								$this->editView($bleh);
 							break;
 							case "f":
@@ -53,9 +49,14 @@ class MainController
 							default:
 								
 						}
+						return false;
 					}
 					else {
-
+						if (isset($code['create']))
+						{
+							return true;
+						}
+						return false;
 					}
 				break;
 				default:

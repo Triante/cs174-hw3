@@ -31,7 +31,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 		{
 			$data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
 			$class = new CTV\ApiController();
-			$class->$method($data);
+			$class->$method($data, $method);
 		}
 		else
 		{
@@ -41,10 +41,17 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 	else if(isset($_POST['name']))
 	{
 		$method = $_REQUEST["m"];
-		if($method == "insert")
+		if($method == "view")
 		{
-			$class = new CTV\ApiController();
-			$class->$method($_POST['name']);
+			$class = new CTV\MainController();
+			$data = ['sheet'=>$_POST['name'], 'page'=>'read', 'create'=>true];
+			if($class->$method($data))
+			{
+				$class2 = new CTV\ApiController();
+				$method2 = 'insert';
+				$class2->$method2($_POST['name']);
+				$class->$method($data);
+			}
 		}
 		else
 		{
@@ -53,11 +60,10 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 	}
 	else
 	{
-		echo "over there";
 		$class = new CTV\MainController();
 		$method = "view";
 		$class->$method(["page"=>"home"]);
-		
+
 	}
 }
 else

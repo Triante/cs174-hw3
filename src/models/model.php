@@ -174,13 +174,20 @@ class Model
 	*/
     public function update($data, $operation)
 	{
+        echo '<script>console.log("enter update function")</script>';
 		switch ($operation) {
             case 'update':
+                echo '<script>console.log("enter update case")</script>';
                 $json = $data["json"];
                 $sheetID = $data["id"];
-                $quarySheet = "UPDATE `sheet` SET `sheet_data` = `".$json."` WHERE `sheet_data` = '".$sheetID."';";
+                $quarySheet = "UPDATE `sheet` SET `sheet_data` = '".$json."' WHERE `sheet_id` = '".$sheetID."';";
+                echo '<div>'.$quarySheet.'</div>';
                 if ($dbquery = self::$db->query($quarySheet)) {
+                    echo '<script>console.log("successfull save")</script>';
                     return true;
+                }
+                else {
+                    echo '<script>console.log("db error")</script>';
                 }
                 break;
             case 'insert':
@@ -210,7 +217,7 @@ class Model
                 echo "unsuported type";
                 return false;
                 break;
-            $this->db->error;
+            echo $this->db->error;
             return false;
         }
 	}

@@ -20,7 +20,7 @@ class ApiController
 	{
 		$this->model->update($data, $operation);
 	}
-	
+
 	public function insert($name)
 	{	
 		self::$hasher = random_int(0,100000000);
@@ -43,9 +43,8 @@ class ApiController
 			}
 			break;
 		}
-		$json = '[["",""],["",""]]';
+		$json = json_encode([["",""],["",""]]);
 		$data = ["title"=>$name, "json"=>$json, "codeE"=>$edithash, "codeR"=>$readhash, "codeF"=>$filehash];
 		$this->model->update($data, "insert");
-		header("Location: index.php?c=main&m=view&arg1=".$edithash);
 	}
 }
