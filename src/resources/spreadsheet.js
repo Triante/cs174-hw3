@@ -100,7 +100,7 @@ function Spreadsheet(spreadsheet_id, supplied_data)
                         item = self.evaluateCell(item.substring(1), 0)[1];
                     }
                 }
-                table += "<td>" + item + "</td>";
+                table += "<td contenteditable>" + item + "</td>";
             }
             table += "</tr>";
         }
@@ -252,13 +252,13 @@ function Spreadsheet(spreadsheet_id, supplied_data)
         var length = data.length;
         var width = data[0].length;
         if (row >= 0 && column >= 0) {
-            var new_value = prompt(self.letterRepresentation(column) +
-                (row + 1), data[row][column]);
+            var new_value = data[row][column];//prompt(self.letterRepresentation(column) +
+                //(row + 1), data[row][column]);
             if (new_value != null) {
                 data[row][column] = new_value;
                 data_elt = document.getElementById(self.data_id);
                 data_elt.value = JSON.stringify(data);
-                event.target.innerHTML = new_value;
+				event.target.innerHTML = new_value;
             }
         } else if (type == 'add' && row == -1 && column >= 0) {
             for (var i = 0; i < length; i++) {
@@ -305,7 +305,36 @@ function Spreadsheet(spreadsheet_id, supplied_data)
         event.stopPropagation();
         event.preventDefault();
     }
+	
+	p.evaluate = function(event)
+	{
+		var row = event.target.parentElement.rowIndex - 1;
+		var column = event.target.cellIndex - 1;
+		if(data[row][column].charAt(0) == "=")
+		{
+			var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
+			if(cell != event.target.innerHTML)
+			{
+				data[row][column] = event.target.innerHTML;
+				data_elt = document.getElementById(self.data_id);
+				data_elt.value = JSON.stringify(data);
+				self.draw();
+			}
+		}
+		else
+		{
+			if(data[row][column] != event.target.innerHTML)
+			{
+				data[row][column] = event.target.innerHTML;
+				data_elt = document.getElementById(self.data_id);
+				data_elt.value = JSON.stringify(data);
+				self.draw();
+			}
+		}
+	}
+	
     if (this.mode == 'write') {
-        container.addEventListener("click", self.updateCell, true);
+        container.addEventListener("click", self.updateCell, true);	
+		container.addEventListener("blur", self.evaluate, true);
     }
 }

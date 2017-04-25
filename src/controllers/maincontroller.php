@@ -31,11 +31,11 @@ class MainController
 						switch($data['type'])
 						{
 							case "read":
-								$this->sheetView($data);
+								$this->sheetView($bleh);
 							break;
 							case "edit":
 								$bleh['title'] = "test";
-								$bleh['json'] = [["jason", "json", "JSON"], ["Java", "JS", "Javascript"]];
+								$bleh['json'] = '[["10", "3", "=(A1+A1)"], ["Java", "JS", "Javascript"]]';
 								$this->editView($bleh);
 							break;
 							case "file":
@@ -67,7 +67,7 @@ class MainController
 	private function sheetView($data)
 	{
 		$this->view = new VIEW\ReadSheetView();
-		$this->view->render();
+		$this->view->render($data);
 	}
 
 	private function xmlView($data)
