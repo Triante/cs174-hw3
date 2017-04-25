@@ -25,6 +25,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 {
 	if (isset($_POST['json']) && isset($_POST['id']))
 	{
+		echo "in here";
 		$method = $_REQUEST['m'];
 		if($method == "update")
 		{
@@ -34,7 +35,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 		}
 		else
 		{
-			Header("Location: index.php?");
+			header("Location: index.php?");
 		}
 	}
 	else if(isset($_POST['name']))
@@ -42,22 +43,25 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 		$method = $_REQUEST["m"];
 		if($method == "insert")
 		{
-			$data = ['name'=>$_POST["name"]];
 			$class = new CTV\ApiController();
-			$class->$method($data);
+			$class->$method($_POST['name']);
 		}
 		else
 		{
-			Header("Location: index.php?");
+			header("Location: index.php?");
 		}
 	}
 	else
 	{
-		
+		echo "over there";
 		$class = new CTV\MainController();
 		$method = "view";
 		$class->$method(["page"=>"home"]);
 		
 	}
+}
+else
+{
+	echo "go home!";
 }
 

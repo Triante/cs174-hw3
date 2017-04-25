@@ -51,7 +51,7 @@ class MainController
 							case "f":
 							break;
 							default:
-
+								
 						}
 					}
 					else {

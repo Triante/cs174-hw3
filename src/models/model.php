@@ -27,7 +27,7 @@ class Model
 		{
 			self::connect($hostname, CFG\Config::user, CFG\Config::password, CFG\Config::db);
 		}
-        echo '<script>console.log("Enters Model Construct")</script>';
+        //echo '<script>console.log("Enters Model Construct")</script>';
 
 	}
 
@@ -190,10 +190,11 @@ class Model
                 $codeE = $data["codeE"];
                 $codeF = $data["codeF"];
                 $quaryInsert = "INSERT INTO `sheet`(`sheet_name`, `sheet_data`) VALUES ('".$title."', '".$json."');";
-                if ($dbquery = self::$db->query($quarySheet)) {
+                if ($dbquery = self::$db->query($quaryInsert)) {
                     $queryID = "SELECT max(`sheet_id`) AS `sheet_id` FROM `sheet`";
                     if ($dbquery = self::$db->query($queryID)) {
-                        if ($id = $dbquery->fetch_object()) {
+                        if ($obj = $dbquery->fetch_object()) {
+							$id = $obj->sheet_id;
                             $queryInsertRead = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$codeR."', 'r');";
                             $queryInsertEdit = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$codeE."', 'e');";
                             $queryInsertFile = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$codeF."', 'f');";
@@ -214,7 +215,7 @@ class Model
         }
 	}
 
-    public function checkIfExist($hashCode) {
+    public function checkIfExists($hashCode) {
         $query = "SELECT `sheet_id` FROM `sheet_codes` WHERE '".$hashCode."' = `hash_code`;";
         if ($dbquery = self::$db->query($query)) {
             $ret = $dbquery->fetch_object();

@@ -18,6 +18,8 @@
 function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 {
     var self = this;
+	var page_type = (typeof arguments[3] !== 'undefined') ?
+		"edit" : "read;
     var displayed_sheet_id = current_sheet_id;
     var p = Spreadsheet.prototype;
     var properties = (typeof arguments[3] !== 'undefined') ?
@@ -101,7 +103,14 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
                         item = self.evaluateCell(item.substring(1), 0)[1];
                     }
                 }
-                table += "<td contenteditable>" + item + "</td>";
+				if (page_type == "edit")
+				{
+					table += "<td contenteditable>" + item + "</td>";
+				}
+				else
+				{
+					table += "<td>" + item + "</td>";
+				}
             }
             table += "</tr>";
         }

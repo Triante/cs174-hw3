@@ -35,7 +35,7 @@ class LandingView {
 						request.onreadystatechange = function() {
 							switch(request.readyState) {
 								case 4:
-									//window.location.href = "index.php?index.php?c=main&m=view";
+									alert(request.responseText);//window.location.href = "index.php?index.php?c=main&m=view";
 								break;
 							}
 						}
