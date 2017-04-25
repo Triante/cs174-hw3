@@ -8,14 +8,14 @@ class ApiController
 {
 	private $model;
 	private $view;
-	
+
 	public function __construct()
 	{
 		$model = new MODEL\Model();
 	}
-	
-	public function updateModel($code, $type)
+
+	public function update($data, $operation)
 	{
-		$model->updateModel($code, $type);
+		$model->update($data, $operation);
 	}
 }

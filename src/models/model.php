@@ -135,15 +135,17 @@ class Model
             case 'insert':
                 $title = $data["title"];
                 $json = $data["json"];
-                $code = $data["code"];
+                $codeR = $data["codeR"];
+                $codeE = $data["codeE"];
+                $codeF = $data["codeF"];
                 $quaryInsert = "INSERT INTO `sheet`(`sheet_name`, `sheet_data`) VALUES ('".$title."', '".$json."');";
                 if ($dbquery = self::$db->query($quarySheet)) {
                     $queryID = "SELECT max(`sheet_id`) AS `sheet_id` FROM `sheet`";
                     if ($dbquery = self::$db->query($queryID)) {
                         if ($id = $dbquery->fetch_object()) {
-                            $queryInsertRead = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$code."', 'r');";
-                            $queryInsertEdit = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$code."', 'e');";
-                            $queryInsertFile = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$code."', 'f');";
+                            $queryInsertRead = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$codeR."', 'r');";
+                            $queryInsertEdit = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$codeE."', 'e');";
+                            $queryInsertFile = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$codeF."', 'f');";
                             if ($dbquery = self::$db->query($queryInsertRead)) { if ($dbquery = self::$db->query($queryInsertEdit)) { if ($dbquery = self::$db->query($queryInsertFile)) {
                                 return true;
                              } } }
@@ -152,8 +154,12 @@ class Model
                     }
                 }
                 break;
-                echo  $this->db->error;
+            default:
+                echo "unsuported type";
                 return false;
+                break;
+            $this->db->error;
+            return false;
         }
 	}
 

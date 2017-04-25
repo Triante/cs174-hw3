@@ -36,8 +36,9 @@ class EditSheetView {
             <div id="spreadsheet_edit"></div>
 			<script>
 				var json_string = '<?= $data['json'] ?>';
+                var sheet_id = '<?= $data['id'] ?>';
 				var json_array = JSON.parse(json_string);
-				var spreadsheet2 = new Spreadsheet("spreadsheet_edit",
+				var spreadsheet2 = new Spreadsheet(sheet_id, "spreadsheet_edit",
 				json_array, {"mode":"write"}); //editable
 				spreadsheet2.draw();
 			</script>
