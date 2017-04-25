@@ -23,15 +23,15 @@ class EditSheetView {
             <h1><a href="index.php">Web Sheets</a> : <?= $data['title'] ?></h1>
             <div>
                 <label for="edit_url">Edit URL:</label>
-                <input id="edit_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_e"/>
+                <input id="edit_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeE'] ?>_e"/>
             </div>
             <div>
                 <label for="read_url">Read URL:</label>
-                <input id="read_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_r"/>
+                <input id="read_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeR'] ?>_r"/>
             </div>
             <div>
                 <label for="file_url">File URL:</label>
-                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_f"/>
+                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeF'] ?>_f"/>
             </div>
             <div id="spreadsheet_edit"></div>
 			<script>

@@ -23,7 +23,7 @@ if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
 }
 if (isset($_POST["operation"])) {
     if (isset($_POST["json"])) {
-        $data = ['json'=>$_POST["json"], 'id'=>isset($_POST["id"]];
+        $data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
         $class = new CTV\ApiController();
         $method = $_POST["operation"];
         $class->$method($data);
