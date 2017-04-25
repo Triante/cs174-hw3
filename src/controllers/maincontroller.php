@@ -24,7 +24,6 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-						//$code['sheet'] = "test";
 						$data = $this->model->read($code['sheet']);
 
 					if (!empty($data))
@@ -45,6 +44,7 @@ class MainController
 								$this->editView($bleh);
 							break;
 							case "f":
+								$this->xmlView($bleh);
 							break;
 							default:
 								
@@ -56,7 +56,7 @@ class MainController
 						{
 							return true;
 						}
-						return false;
+						echo "<div>bad Luis</div>";
 					}
 				break;
 				default:

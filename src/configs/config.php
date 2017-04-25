@@ -17,4 +17,5 @@ class Config
 	const db = 'websheet_db';
 
 	const location = 'America/Los_Angeles';
+	const V_URL = 'localhost/cs174/cs174-hw3/index.php?';
 }

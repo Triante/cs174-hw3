@@ -5,6 +5,7 @@
 namespace jorgeandco\hw4\views;
 
 use jorgeandco\hw4\views\layouts as LYOT;
+use jorgeandco\hw4 as CFG;
 
 class EditSheetView {
     private $head;
@@ -23,15 +24,15 @@ class EditSheetView {
             <h1><a href="index.php">Web Sheets</a> : <?= $data['title'] ?></h1>
             <div>
                 <label for="edit_url">Edit URL:</label>
-                <input id="edit_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeE'] ?>"/>
+                <input id="edit_url" type="text" disabled="disabled" value="<?=CFG\Config::V_URL?>c=main&m=view&amp;arg1=<?= $data['codeE'] ?>"/>
             </div>
             <div>
                 <label for="read_url">Read URL:</label>
-                <input id="read_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeR'] ?>"/>
+                <input id="read_url" type="text" disabled="disabled" value="<?=CFG\Config::V_URL?>c=main&m=view&amp;arg1=<?= $data['codeR'] ?>"/>
             </div>
             <div>
                 <label for="file_url">File URL:</label>
-                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeF'] ?>"/>
+                <input id="file_url" type="text" disabled="disabled" value="<?=CFG\Config::V_URL?>c=main&m=view&amp;arg1=<?= $data['codeF'] ?>"/>
             </div>
             <div id="spreadsheet_edit"></div>
 			<script>

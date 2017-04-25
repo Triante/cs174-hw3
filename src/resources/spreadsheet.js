@@ -109,7 +109,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 				}
 				else
 				{
-					//table += "<td>" + item + "</td>";
+					table += "<td>" + item + "</td>";
 				}
             }
             table += "</tr>";

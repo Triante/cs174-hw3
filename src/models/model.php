@@ -56,7 +56,6 @@ class Model
 	*/
     public function read($data)
 	{
-        echo '<script>console.log("Enters read")</script>';
 		if (preg_match("/\\s/", $data)) {
    			// there are spaces
    			$this->readWithName($data);
