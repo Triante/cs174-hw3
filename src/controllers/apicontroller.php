@@ -13,17 +13,17 @@ class ApiController
 	public function __construct()
 	{
 		$this->model = new MODEL\Model();
-		$this->hasher = random_int(0,100000000);
+		self::$hasher = random_int(0,100000000);
 	}
 
 	public function update($data, $operation)
 	{
 		$this->model->update($data, $operation);
 	}
-	
+
 	public function insert($name)
 	{
-		$this->hasher = random_int(0,100000000);
+		self::$hasher = random_int(0,100000000);
 		$edithash = substr(md5($hasher.$name."e"), 0, 8);
 		$readhash = substr(md5($hasher.$name."r"), 0, 8);
 		$filehash = substr(md5($hasher.$name."f"), 0, 8);

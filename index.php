@@ -17,9 +17,12 @@ if(isset($_REQUEST['arg1']))
 }
 else if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
 {
-	$class = new CTV\MainController();
-	$method = "view";
-	$class->$method(["page"=>"home"]);
+	// $class = new CTV\MainController();
+	// $method = "view";
+	// $class->$method(["page"=>"home"]);
+    $class = new CTV\MainController();
+    $method = "view";
+    $class->$method(["page" => "read", "sheet" => "blah"]);
 }
 else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 {
@@ -28,9 +31,11 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 		$method = $_REQUEST['m'];
 		if($method == "update")
 		{
+            echo '<script>console.log("enter update post")</script>';
+            echo '<script>alert("enter update post")</script>';
 			$data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
 			$class = new CTV\ApiController();
-			$class->$method($data);
+			$class->$method($data, $method);
 		}
 		else
 		{
@@ -53,11 +58,10 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 	}
 	else
 	{
-		
 		$class = new CTV\MainController();
 		$method = "view";
 		$class->$method(["page"=>"home"]);
-		
+
 	}
 }
 

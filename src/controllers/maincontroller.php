@@ -24,7 +24,7 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-						$code['sheet'] = "12345671";
+						$code['sheet'] = "test";
 						$data = $this->model->read($code['sheet']);
 
 						#$bleh['title'] = "test";
