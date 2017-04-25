@@ -3,6 +3,8 @@ namespace jorgeandco\hw4\controllers;
 
 use jorgeandco\hw4\models as MODEL;
 use jorgeandco\hw4\views as VIEW;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class MainController
 {
@@ -21,6 +23,7 @@ class MainController
 			switch($code['page'])
 			{
 				case "home":
+					$this->monologWrite("User entered landing page");
 					$this->home();
 					break;
 				case "read":
@@ -38,9 +41,11 @@ class MainController
 						switch($bleh['type'])
 						{
 							case "r":
+								$this->monologWrite("User entered read page");
 								$this->sheetView($bleh);
 							break;
 							case "e":
+								$this->monologWrite("User entered edit page");
 								$this->editView($bleh);
 							break;
 							case "f":
@@ -91,6 +96,16 @@ class MainController
 	{
 		$this->view = new VIEW\EditSheetView();
 		$this->view->render($data);
+	}
+	
+	private function monologWrite($message)
+	{
+		// create a log channel
+		$log = new Logger('activity');
+		$log->pushHandler(new StreamHandler('app_data/spread.log', Logger::INFO));
+
+		// add records to the log
+		$log->info($message);
 	}
 
 }
