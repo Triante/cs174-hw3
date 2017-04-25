@@ -342,7 +342,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
     p.storeDataAsJSONString = function(sheet_id) {
         var JSONString = JSON.stringify(data);
         var request = new XMLHttpRequest();
-        request.open("POST", "index.php", true);
+        request.open("POST", "index.php?c=api&m=update", true);
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.onreadystatechange = function() {
             switch(request.readyState) {
@@ -350,7 +350,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
                     alert("GOOD");
             }
         }
-        var params = "json=" + JSONString + "&operation=update&id=" + displayed_sheet_id;
+        var params = "json=" + JSONString + "&id=" + displayed_sheet_id;
         request.send(params);
     }
 }

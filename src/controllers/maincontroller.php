@@ -24,8 +24,8 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-						$code = "12345671";
-						$data = $this->model->read($code);
+						$code['sheet'] = "12345671";
+						$data = $this->model->read($code['sheet']);
 
 						#$bleh['title'] = "test";
 						#$bleh['json'] = '[["10", "3", "=(A1+A1)"], ["Java", "JS", "Javascript"]]';
@@ -36,6 +36,7 @@ class MainController
 						$bleh['codeR'] = $data['codeR'];
 						$bleh['codeE'] = $data['codeE'];
 						$bleh['codeF'] = $data['codeF'];
+
 					if (!empty($data))
 					{
 						switch($bleh['type'])

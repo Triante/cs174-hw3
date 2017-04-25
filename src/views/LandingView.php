@@ -27,7 +27,13 @@ class LandingView {
                     var textBox = document.getElementById("sheet_search");
                     text = textBox.value;
                     if (verifyText(text)) {
-                        window.location.href = "index.php?index.php?c=main&m=view&arg="+text;
+						var url = "index.php?c=api&m=insert";
+						var sheet_identifier = "name=" + text;
+						var request = new XMLHttpRequest();
+						request.open("POST", url, false);
+						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						request.send(sheet_identifier);
+                        //window.location.href = "index.php?index.php?c=main&m=view";
                     }
                     else {
                         alert("Please enter alphanumerical or space characters");
