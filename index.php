@@ -21,11 +21,11 @@ else if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
 	$method = "view";
 	$class->$method(["page"=>"home"]);
 }
-else if(isset($_REQUEST["m"]) && isset($_REQUEST["c"]))
+else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 {
-	if ((isset($_POST["json"]) && isset($_POST["id"])))
+	if (isset($_POST['json']) && isset($_POST['id']))
 	{
-		$method = $_REQUEST["m"];
+		$method = $_REQUEST['m'];
 		if($method == "update")
 		{
 			$data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
@@ -53,9 +53,11 @@ else if(isset($_REQUEST["m"]) && isset($_REQUEST["c"]))
 	}
 	else
 	{
+		
 		$class = new CTV\MainController();
 		$method = "view";
 		$class->$method(["page"=>"home"]);
+		
 	}
 }
 

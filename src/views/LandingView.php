@@ -30,10 +30,16 @@ class LandingView {
 						var url = "index.php?c=api&m=insert";
 						var sheet_identifier = "name=" + text;
 						var request = new XMLHttpRequest();
-						request.open("POST", url, false);
+						request.open("POST", url, true);
 						request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						request.onreadystatechange = function() {
+							switch(request.readyState) {
+								case 4:
+									//window.location.href = "index.php?index.php?c=main&m=view";
+								break;
+							}
+						}
 						request.send(sheet_identifier);
-                        //window.location.href = "index.php?index.php?c=main&m=view";
                     }
                     else {
                         alert("Please enter alphanumerical or space characters");
