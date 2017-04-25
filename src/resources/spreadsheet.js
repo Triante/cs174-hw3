@@ -15,12 +15,13 @@
  * @param Array supplied_data two dimensional array of the rows and columns
  *      of data for the spreadsheet
  */
-function Spreadsheet(spreadsheet_id, supplied_data)
+function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 {
     var self = this;
+    var displayed_sheet_id = current_sheet_id;
     var p = Spreadsheet.prototype;
-    var properties = (typeof arguments[2] !== 'undefined') ?
-        arguments[2] : {};
+    var properties = (typeof arguments[3] !== 'undefined') ?
+        arguments[3] : {};
     var container = document.getElementById(spreadsheet_id);
     if (!container) {
         return false;
@@ -305,7 +306,7 @@ function Spreadsheet(spreadsheet_id, supplied_data)
         event.stopPropagation();
         event.preventDefault();
     }
-	
+
 	p.evaluate = function(event)
 	{
 		var row = event.target.parentElement.rowIndex - 1;
@@ -332,9 +333,24 @@ function Spreadsheet(spreadsheet_id, supplied_data)
 			}
 		}
 	}
-	
+
     if (this.mode == 'write') {
-        container.addEventListener("click", self.updateCell, true);	
+        container.addEventListener("click", self.updateCell, true);
 		container.addEventListener("blur", self.evaluate, true);
+    }
+
+    p.storeDataAsJSONString = function(sheet_id) {
+        var JSONString = JSON.stringify(data);
+        var request = new XMLHttpRequest();
+        request.open("POST", "index.php", true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function() {
+            switch(request.readyState) {
+                case 4:
+                    alert("GOOD");
+            }
+        }
+        var params = "json=" + JSONString + "&operation=update&id=" + displayed_sheet_id;
+        request.send(params);
     }
 }
