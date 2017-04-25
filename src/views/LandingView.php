@@ -17,7 +17,7 @@ class LandingView {
     }
 
     function render() {
-        $this->head->render()
+        $this->head->render("html")
         ?>
         <body>
             <script type="text/javascript">

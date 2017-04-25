@@ -49,6 +49,7 @@ class MainController
 								$this->editView($bleh);
 							break;
 							case "f":
+								$bleh['json'] = json_decode($bleh['json']);
 								$this->xmlView($bleh);
 							break;
 							default:
@@ -88,7 +89,8 @@ class MainController
 
 	private function xmlView($data)
 	{
-
+		$this->view = new VIEW\XMLSheetView();
+		$this->view->render($data);
 	}
 
 

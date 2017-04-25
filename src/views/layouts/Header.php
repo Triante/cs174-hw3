@@ -18,21 +18,31 @@ class Header
     *   Renders the header of the application by writing the doctype, head, and opening body tags of the application's XHTML5 document
     *   @param String $data (the current date to be used as part of the pages title)
     */
-    function render()
+    function render($type)
     {
-        $styleDir = 'src/styles/styles.css';
-        ?>
-            <!doctype html>
-            <html>
-                <head>
-                    <title>CS174 HW4 Datasheets</title>
-                    <?php
-                        if ($this->hasScript) {
-                            ?><script type="text/javascript" src="<?= $this->scriptLoc ?>"></script><?php
-                        }
-                    ?>
+		if ($type == "xml")
+		{
+			?>
+				<?xml version="1.0" encoding="UTF-8"?>
+				<!DOCTYPE spreadsheet SYSTEM <?=$this->scriptLoc?>>
+			<?php
+		}
+		else
+		{
+				$styleDir = 'src/styles/styles.css';
+			?>
+				<!doctype html>
+				<html>
+					<head>
+						<title>CS174 HW4 Datasheets</title>
+						<?php
+							if ($this->hasScript) {
+								?><script type="text/javascript" src="<?= $this->scriptLoc ?>"></script><?php
+							}
+						?>
 
-                </head>
-        <?php
+					</head>
+			<?php
+		}
     }
 }

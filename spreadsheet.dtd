@@ -1,4 +1,7 @@
 <?xml version = "1.0" encoding ="utf-8" ?>
-<!ELEMENT SpreadSheet (row+) >
-<!ELEMENT row (data+) >
-<!ELEMENT data (#PCDATA)>
+<!ELEMENT spreadsheet (row+) >
+<!ATTLIST spreadsheet name CDATA #REQUIRED>
+<!ELEMENT row (column+) >
+<!ATTLIST row number CDATA #REQUIRED>
+<!ELEMENT column (#PCDATA)>
+<!ATTLIST column letter CDATA #REQUIRED>

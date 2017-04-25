@@ -18,7 +18,7 @@ class ReadSheetView {
 
 
     function render($data) {
-        $this->head->render()
+        $this->head->render("html")
         ?>
         <body>
             <h1><a href="index.php">Web Sheets</a> : <?= $data['title'] ?></h1>
