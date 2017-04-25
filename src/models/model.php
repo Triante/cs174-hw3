@@ -76,7 +76,7 @@ class Model
 	}
 
 	private function readWithCode($data) {
-		$query = "SELECT `sheet_id`, `code_type` FROM `sheet_codes` WHERE `".$data."`= `hash_code`;";
+		$query = "SELECT `sheet_id`, `code_type` FROM `sheet_codes` WHERE '".$data."' = `hash_code`;";
 		if ($dbquery = self::$db->query($query)) {
 			$obj = $dbquery->fetch_object();
 			if (empty($obj->sheet_id)) {
@@ -84,7 +84,7 @@ class Model
 			}
 			$sheetId = $obj->sheet_id;
 			$codeType = $obj->code_type;
-			$query = "SELECT `sheet_name`, `sheet_data` FROM `sheet` WHERE `".$sheetId."`= `sheet_id`;";
+			$query = "SELECT `sheet_name`, `sheet_data` FROM `sheet` WHERE '".$sheetId."'= `sheet_id`;";
 			if ($dbquery = self::$db->query($query)) {
 				$obj = $dbquery->fetch_object();
 				$sheetName = $obj->sheet_name;
@@ -97,7 +97,7 @@ class Model
 	}
 
 	private function readWithName($data) {
-		$query = "SELECT `sheet_id`, `sheet_data` FROM `sheet` WHERE `".$data."` = `sheet_name`;";
+		$query = "SELECT `sheet_id`, `sheet_data` FROM `sheet` WHERE '".$data."' = `sheet_name`;";
 		if ($dbquery = self::$db->query($query)) {
 			$obj = $dbquery->fetch_object();
 			if (empty($obj->sheet_id)) {
@@ -105,7 +105,7 @@ class Model
 			}
 			$sheetId = $obj->sheet_id;
 			$sheetData = $obj->sheet_data;
-			$query = "SELECT `code_type`, `hash_code` FROM `sheet_codes` WHERE `".$sheetId."`= `sheet_id`;";
+			$query = "SELECT `code_type`, `hash_code` FROM `sheet_codes` WHERE '".$sheetId."'= `sheet_id`;";
 			if ($dbquery = self::$db->query($query)) {
 				$obj = $dbquery->fetch_object();
 				$codeType = $obj->code_type;
@@ -123,8 +123,51 @@ class Model
 	*/
     public function update($data, $operation)
 	{
-		//to do
+		switch ($operation) {
+            case 'update':
+                $json = $data["json"];
+                $sheetID = $data["id"];
+                $quarySheet = "UPDATE `sheet` SET `sheet_data` = `".$json."` WHERE `sheet_data` = '".$sheetID."';";
+                if ($dbquery = self::$db->query($quarySheet)) {
+                    return true;
+                }
+                break;
+            case 'insert':
+                $title = $data["title"];
+                $json = $data["json"];
+                $code = $data["code"];
+                $quaryInsert = "INSERT INTO `sheet`(`sheet_name`, `sheet_data`) VALUES ('".$title."', '".$json."');";
+                if ($dbquery = self::$db->query($quarySheet)) {
+                    $queryID = "SELECT max(`sheet_id`) AS `sheet_id` FROM `sheet`";
+                    if ($dbquery = self::$db->query($queryID)) {
+                        if ($id = $dbquery->fetch_object()) {
+                            $queryInsertRead = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$code."', 'r');";
+                            $queryInsertEdit = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$code."', 'e');";
+                            $queryInsertFile = "INSERT INTO `sheet_codes`(`sheet_id`, `hash_code`, `code_type`) VALUES ('".$id."', '".$code."', 'f');";
+                            if ($dbquery = self::$db->query($queryInsertRead)) { if ($dbquery = self::$db->query($queryInsertEdit)) { if ($dbquery = self::$db->query($queryInsertFile)) {
+                                return true;
+                             } } }
+                        }
+
+                    }
+                }
+                break;
+                echo  $this->db->error;
+                return false;
+        }
 	}
+
+    public function checkIfExist($hashCode) {
+        $query = "SELECT `sheet_id` FROM `sheet_codes` WHERE '".$hashCode."' = `hash_code`;";
+        if ($dbquery = self::$db->query($query)) {
+            $ret = $dbquery->fetch_object();
+            if (empty($ret->sheet_id)) {
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
 
 
 
