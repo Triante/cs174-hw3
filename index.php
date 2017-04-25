@@ -37,7 +37,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 			Header("Location: index.php?");
 		}
 	}
-	else if(isset($_POST['name'])) 
+	else if(isset($_POST['name']))
 	{
 		$method = $_REQUEST["m"];
 		if($method == "insert")

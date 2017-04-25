@@ -11,7 +11,7 @@ class MainController
 
 	public function __construct()
 	{
-		$model = new MODEL\Model();
+		$this->model = new MODEL\Model();
 	}
 
 	public function view($code)
@@ -24,21 +24,31 @@ class MainController
 					$this->home();
 					break;
 				case "read":
-					$data = $this->$model->read($code['sheet']);
-					//$data['type'] = "edit";
+						$code['sheet'] = "12345671";
+						$data = $this->model->read($code['sheet']);
+
+						#$bleh['title'] = "test";
+						#$bleh['json'] = '[["10", "3", "=(A1+A1)"], ["Java", "JS", "Javascript"]]';
+						$bleh['title'] = $data['title'];
+						$bleh['json'] = $data['json'];
+						$bleh['id'] = $data['id'];
+						$bleh['type'] = $data['type'];
+						$bleh['codeR'] = $data['codeR'];
+						$bleh['codeE'] = $data['codeE'];
+						$bleh['codeF'] = $data['codeF'];
+
 					if (!empty($data))
 					{
-						switch($data['type'])
+						switch($bleh['type'])
 						{
-							case "read":
+							case "r":
 								$this->sheetView($bleh);
 							break;
-							case "edit":
-								$bleh['title'] = "test";
-								$bleh['json'] = '[["10", "3", "=(A1+A1)"], ["Java", "JS", "Javascript"]]';
+							case "e":
+								echo '<script>console.log("Enters Edit")</script>';
 								$this->editView($bleh);
 							break;
-							case "file":
+							case "f":
 							break;
 							default:
 

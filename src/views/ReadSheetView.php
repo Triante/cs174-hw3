@@ -24,12 +24,15 @@ class ReadSheetView {
             <h1><a href="index.php">Web Sheets</a> : <?= $data['title'] ?></h1>
             <div>
                 <label for="file_url">File URL:</label>
-                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=8_digit_hash_f"/>
+                <input id="file_url" type="text" disabled="disabled" value="V_URL&amp;arg1=<?= $data['codeF'] ?>_f"/>
             </div>
             <div id="spreadsheet_edit"></div>
             <script>
-                var spreadsheet2 = new Spreadsheet("spreadsheet_edit",
-                [["Tom"],["Sally"]]); //read only
+                var json_string = '<?= $data['json'] ?>';
+                var sheet_id = '<?= $data['id'] ?>';
+                var json_array = JSON.parse(json_string);
+                var spreadsheet2 = new Spreadsheet(sheet_id, "spreadsheet_edit",
+                json_array); //read
                 spreadsheet2.draw();
             </script>
         </body>
