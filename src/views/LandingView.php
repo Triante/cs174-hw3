@@ -27,7 +27,7 @@ class LandingView {
                     var textBox = document.getElementById("sheet_search");
                     text = textBox.value;
                     if (verifyText(text)) {
-                        window.location.href = "index.php?index.php?c=main&m=view&arg="+text;
+                        window.location.href = "index.php?index.php?c=main&m=view";
                     }
                     else {
                         alert("Please enter alphanumerical or space characters");

@@ -11,13 +11,13 @@ use jorgeandco\hw4\controllers as CTV;
 if(isset($_REQUEST['arg1']))
 {
 	$class = new CTV\MainController();
-	$method = 'view';
-	//$method = manage;
+	$method = "view";
+	$class->$method(["page" => "read", "sheet" => $_REQUEST['arg1']]);
 }
 if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
 {
 	$class = new CTV\MainController();
 	$method = "view";
-	$class->$method(["page"=>"read"]);
+	$class->$method(["page"=>"home"]);
 }
 
