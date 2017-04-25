@@ -22,10 +22,7 @@ class Header
     {
 		if ($type == "xml")
 		{
-			?>
-				<?xml version="1.0" encoding="UTF-8"?>
-				<!DOCTYPE spreadsheet SYSTEM <?=$this->scriptLoc?>>
-			<?php
+			header('Content-Type: text/xml');
 		}
 		else
 		{
