@@ -15,18 +15,47 @@ if(isset($_REQUEST['arg1']))
 	$method = "view";
 	$class->$method(["page" => "read", "sheet" => $_REQUEST['arg1']]);
 }
-if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
+else if (!isset($_REQUEST['c']) || !isset($_REQUEST['m']))
 {
 	$class = new CTV\MainController();
 	$method = "view";
 	$class->$method(["page"=>"home"]);
 }
-if (isset($_POST["operation"])) {
-    if (isset($_POST["json"])) {
-        $data = ['json'=>$_POST["json"], 'id'=>isset($_POST["id"]];
-        $class = new CTV\ApiController();
-        $method = $_POST["operation"];
-        $class->$method($data);
-    }
+else if(isset($_REQUEST["m"]) && isset($_REQUEST["c"]))
+{
+	if ((isset($_POST["json"]) && isset($_POST["id"])))
+	{
+		$method = $_REQUEST["m"];
+		if($method == "update")
+		{
+			$data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
+			$class = new CTV\ApiController();
+			$class->$method($data);
+		}
+		else
+		{
+			Header("Location: index.php?");
+		}
+	}
+	else if(isset($_POST['name'])) 
+	{
+		$method = $_REQUEST["m"];
+		if($method == "insert")
+		{
+			$data = ['name'=>$_POST["name"]];
+			$class = new CTV\ApiController();
+			$class->$method($data);
+		}
+		else
+		{
+			Header("Location: index.php?");
+		}
+	}
+	else
+	{
+		$class = new CTV\MainController();
+		$method = "view";
+		$class->$method(["page"=>"home"]);
+	}
 }
 
