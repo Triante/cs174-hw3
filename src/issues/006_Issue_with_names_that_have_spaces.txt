@@ -1,0 +1,8 @@
+Title:Names with spaces do not go through to screens properly
+Member: Jorge Aguiniga
+Description: 
+	Names with spaces fail to be
+	recognized as being in the 
+	database. Even if a new 
+	spreadsheet is created, the
+	view does not show up.
