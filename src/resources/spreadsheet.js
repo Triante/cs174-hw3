@@ -140,18 +140,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         }
         location = self.skipWhitespace(cell_expression, location);
         out[0] = location;
-		if()
-		if(cell_expression.charAt(location) == "a")
-		{
-		  if(cell_expression.charAt(location+1) == "v")
-		  {
-			  if(cell_expression.charAt(location+2) == "g")
-			  {
-				  if(cell_expression.charAt(location+3) == ""
-			  }
-		  }
-		}
-        else if(cell_expression.charAt(location) == "(") {
+        if(cell_expression.charAt(location) == "(") {
             left_out = self.evaluateCell(cell_expression, location + 1);
             if (!['+', '-', '*', '/'].includes(
                 cell_expression.charAt(left_out[0])) ||
@@ -171,7 +160,86 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
             out[1] = eval("" + left_out[1] +
                 cell_expression.charAt(left_out[0]) + right_out[1]);
             return out;
-        } else if (cell_expression.charAt(location) == "-") {
+        }else if(cell_expression.charAt(location) == "a")
+		{
+		  if(cell_expression.length < 10)
+		  {
+			  return out;
+		  }
+		  if(cell_expression.substring(location+1, location+4) == "vg(")
+		  {
+			var value = cell_expression.substring(location+4);
+			var a = value.split(":");
+			if(a.length != 2)
+			{
+				return [location, "=" + cell_expression];
+			}
+		    if(a[1].charAt(a[1].length -1) != ")")
+		    {
+			    return [location,"=" + cell_expression];
+		    }
+			var b = a[1].split(")");
+			var row_col_start = self.cellNameAsRowColumn(a[0].toString().trim());
+			var row_col_end = self.cellNameAsRowColumn(b[0].toString().trim());
+			var row = [row_col_start[0] - 1, row_col_end[0] - 1];
+			var col = [row_col_start[1], row_col_end[1]];
+			if(row[0] == row[1])
+			{
+				var sum = 0;
+			    if(col[0] < col[1])
+			    {
+					var length = col[1] - col[0] + 1;
+					for (var i = col[1]; i >= col[0]; i--)
+					{
+						sum += parseFloat(data[row[0]][i]);
+					}
+					sum /= length;
+			    }
+			  else
+			  {
+				  var length = col[0] - col[1] + 1;
+				for (var i = col[0]; i >= col[1]; i++)
+				{
+					sum += parseFloat(data[row[0]][i]);
+				}
+				sum /= length;
+			  }
+			  out[1] = sum;
+			  out[0] = self.skipWhitespace(cell_expression, cell_expression.length);
+			  return out;
+			}
+			else
+			{
+						   var sum = 0;
+						  if(row[0] > row[1])
+						  {
+							  var length = row[0] - row[1] + 1;
+							for (var i = row[0]; i >= row[1]; i--)
+							{
+								sum += parseFloat(data[i][col[0]]);
+							}
+							sum /= length;
+						  }
+						  else
+						  {
+							  var length = row[1] - row[0] + 1;
+							for (var i = row[0]; i <= row[1]; i++)
+							{
+								sum += parseFloat(data[i][col[0]]);
+							}
+							sum /= length;
+						  }
+						  out[1] = sum;
+						  out[0] = self.skipWhitespace(cell_expression, cell_expression.length);
+						  return out;
+			}
+		  }
+		  else
+		  {
+			return out;  
+		  }
+					  
+		} else if (cell_expression.charAt(location) == "-") {
             sub_out = self.evaluateCell(cell_expression, location + 1);
             if (sub_out[1] == 'NaN') {
                 return sub_out;
@@ -273,8 +341,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         var length = data.length;
         var width = data[0].length;
         if (row >= 0 && column >= 0) {
-            var new_value = data[row][column];//prompt(self.letterRepresentation(column) +
-                //(row + 1), data[row][column]);
+            var new_value = data[row][column];
             if (new_value != null) {
                 data[row][column] = new_value;
                 data_elt = document.getElementById(self.data_id);
@@ -348,6 +415,8 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 	{
 		var row = event.target.parentElement.rowIndex - 1;
 		var column = event.target.cellIndex - 1;
+		
+		
 		if(data[row][column].charAt(0) == "=")
 		{
 			var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
