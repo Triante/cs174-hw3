@@ -118,6 +118,18 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         container.innerHTML = table;
     }
 	
+	/**
+     * Calculates the average of a set of cells in a spreadsheet. The cell is given
+	 * the form =avg(x:y) where x is a cell in the spreadsheet and y is as cell
+     * in the same column or row. The average function calculates the average from
+     * cell x to cell y. The values in all of these cells must either be integers or
+     * floating point numbers. Whitespace is ignored in the cell expressions.
+	 *
+     * @param String cell_expression a string representing an average formula 
+     * @param Number location character position in cell_expression to start
+     *      evaluating from
+     * @return mixed return value of the location of the expression and the cell_expression
+     */
 	p.average = function(cell_expression, location)
 	{
 		var out = [location, "=" + cell_expression];
@@ -128,9 +140,11 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 	  if(cell_expression.substring(location+1, location+4) == "vg(")
 	  {
 			var value = cell_expression.substring(location+4);
+			console.log(value);
 			var a = value.split(":");
 			if(a.length != 2)
 			{
+				console.log(a);
 				return out;
 			}
 			if(a[1].charAt(a[1].length -1) != ")")
@@ -174,6 +188,13 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 				finish = row[0];
 				length = row[0] - row[1] + 1;
 				row_or_col = false;
+			}
+			else if (row[0] == row[1] && col[0] == col[1])
+			{
+				sum = data[row[0]][col[0]];
+				out[1] = sum;
+				out[0] = self.skipWhitespace(cell_expression, cell_expression.length);
+				return out;
 			}
 			else
 			{
@@ -407,8 +428,6 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 
     p.storeDataAsJSONString = function(sheet_id) {
         var JSONString = JSON.stringify(data);
-        console.log(JSONString);
-        console.log(displayed_sheet_id);
         var request = new XMLHttpRequest();
         request.open("POST", "index.php?c=api&m=update", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
