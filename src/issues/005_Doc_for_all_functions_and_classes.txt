@@ -1,0 +1,7 @@
+Title: Documentation for all functions/classes
+Member: Jorge Aguiniga
+Description:
+	The classes and functions for this
+	homework assignment need phpdoc
+	and or jsdoc. Check all the ones
+	that don't already have it.
