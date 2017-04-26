@@ -117,6 +117,43 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         table += "</table></div>";
         container.innerHTML = table;
     }
+	
+	p.average = function(cell_expression, location)
+	{
+		var out = [location, "=" + cell_expression];
+	  if(cell_expression.length < 10)
+	  {
+		  return out;
+	  }
+	  if(cell_expression.substring(location+1, location+4) == "vg(")
+	  {
+			var value = cell_expression.substring(location+4);
+			var a = value.split(":");
+			if(a.length != 2)
+			{
+				return out;
+			}
+			if(a[1].charAt(a[1].length -1) != ")")
+			{
+				return out;
+			}
+			var b = a[1].split(")");
+			var row_col_start = self.cellNameAsRowColumn(a[0].toString().trim());
+			var row_col_end = self.cellNameAsRowColumn(b[0].toString().trim());
+			var row = [row_col_start[0] - 1, row_col_end[0] - 1];
+			var col = [row_col_start[1], row_col_end[1]];
+			var sum = 0;
+			var start;
+			var finish;
+			var length;
+			var row_or_col;
+			
+		else
+		{
+			return out;
+		}
+	}
+	
     /**
      * Calculates the value of a cell expression in a spreadsheet. Currently,
      * a cell expression is either an integer literal, a non-scientific notation
@@ -162,82 +199,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
             return out;
         }else if(cell_expression.charAt(location) == "a")
 		{
-		  if(cell_expression.length < 10)
-		  {
-			  return out;
-		  }
-		  if(cell_expression.substring(location+1, location+4) == "vg(")
-		  {
-			var value = cell_expression.substring(location+4);
-			var a = value.split(":");
-			if(a.length != 2)
-			{
-				return [location, "=" + cell_expression];
-			}
-		    if(a[1].charAt(a[1].length -1) != ")")
-		    {
-			    return [location,"=" + cell_expression];
-		    }
-			var b = a[1].split(")");
-			var row_col_start = self.cellNameAsRowColumn(a[0].toString().trim());
-			var row_col_end = self.cellNameAsRowColumn(b[0].toString().trim());
-			var row = [row_col_start[0] - 1, row_col_end[0] - 1];
-			var col = [row_col_start[1], row_col_end[1]];
-			if(row[0] == row[1])
-			{
-				var sum = 0;
-			    if(col[0] < col[1])
-			    {
-					var length = col[1] - col[0] + 1;
-					for (var i = col[1]; i >= col[0]; i--)
-					{
-						sum += parseFloat(data[row[0]][i]);
-					}
-					sum /= length;
-			    }
-			  else
-			  {
-				  var length = col[0] - col[1] + 1;
-				for (var i = col[0]; i >= col[1]; i++)
-				{
-					sum += parseFloat(data[row[0]][i]);
-				}
-				sum /= length;
-			  }
-			  out[1] = sum;
-			  out[0] = self.skipWhitespace(cell_expression, cell_expression.length);
-			  return out;
-			}
-			else
-			{
-						   var sum = 0;
-						  if(row[0] > row[1])
-						  {
-							  var length = row[0] - row[1] + 1;
-							for (var i = row[0]; i >= row[1]; i--)
-							{
-								sum += parseFloat(data[i][col[0]]);
-							}
-							sum /= length;
-						  }
-						  else
-						  {
-							  var length = row[1] - row[0] + 1;
-							for (var i = row[0]; i <= row[1]; i++)
-							{
-								sum += parseFloat(data[i][col[0]]);
-							}
-							sum /= length;
-						  }
-						  out[1] = sum;
-						  out[0] = self.skipWhitespace(cell_expression, cell_expression.length);
-						  return out;
-			}
-		  }
-		  else
-		  {
-			return out;  
-		  }
+			return self.average(cell_expression, location);
 					  
 		} else if (cell_expression.charAt(location) == "-") {
             sub_out = self.evaluateCell(cell_expression, location + 1);
