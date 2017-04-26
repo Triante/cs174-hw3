@@ -58,7 +58,7 @@ class Model
 	{
 		if (preg_match("/\\s/", $data)) {
    			// there are spaces
-   			$this->readWithName($data);
+   			return $this->readWithName($data);
 		}
 		else {
 			$len = strlen($data);
