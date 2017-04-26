@@ -22,16 +22,13 @@ class Header
     {
 		if ($type == "xml")
 		{
-			?>
-				<?xml version="1.0" encoding="UTF-8"?>
-				<!DOCTYPE spreadsheet SYSTEM <?=$this->scriptLoc?>>
-			<?php
+
 		}
 		else
-		{
+		{}
 				$styleDir = 'src/styles/styles.css';
 			?>
-				<!doctype html>
+				<!DOCTYPE html>
 				<html>
 					<head>
 						<title>CS174 HW4 Datasheets</title>

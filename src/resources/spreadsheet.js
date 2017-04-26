@@ -140,7 +140,18 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         }
         location = self.skipWhitespace(cell_expression, location);
         out[0] = location;
-        if(cell_expression.charAt(location) == "(") {
+		if()
+		if(cell_expression.charAt(location) == "a")
+		{
+		  if(cell_expression.charAt(location+1) == "v")
+		  {
+			  if(cell_expression.charAt(location+2) == "g")
+			  {
+				  if(cell_expression.charAt(location+3) == ""
+			  }
+		  }
+		}
+        else if(cell_expression.charAt(location) == "(") {
             left_out = self.evaluateCell(cell_expression, location + 1);
             if (!['+', '-', '*', '/'].includes(
                 cell_expression.charAt(left_out[0])) ||
