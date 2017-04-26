@@ -21,7 +21,7 @@ class XMLSheetView {
         $this->head->render("xml");
 		$rowNumber = 1;
 		$columnName = 'A';
-        $xml =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE spreadsheet SYSTEM \"spreadsheet.dtd\" >\n";
+        $xml =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE spreadsheet SYSTEM \"spreadsheet.dtd\">\n";
         $xml = $xml."<spreadsheet name='".$data['title']."'>\n";
 		foreach($data['json'] as $row)
 		{
