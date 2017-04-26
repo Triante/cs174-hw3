@@ -147,7 +147,56 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 			var finish;
 			var length;
 			var row_or_col;
-			
+			if(row[0] == row[1] && col[0] < col[1])
+			{
+				start = col[0];
+				finish = col[1];
+				length = col[1] - col[0] + 1;
+				row_or_col = true;
+			}
+			else if (row[0] == row[1] && col[0] > col[1])
+			{
+				start = col[1];
+				finish = col[0];
+				length = col[0] - col[1] + 1;
+				row_or_col = true;
+			}
+			else if (col[0] == col[1] && row[0] < row[1])
+			{
+				start = row[0];
+				finish = row[1];
+				length = row[1] - row[0] + 1;
+				row_or_col = false;
+			}
+			else if (col[0] == col[1] && row[0] > row[1])
+			{
+				start = row[1];
+				finish = row[0];
+				length = row[0] - row[1] + 1;
+				row_or_col = false;
+			}
+			else
+			{
+				return out;
+			}
+		
+			for (var i = start; i <= finish; i++)
+			{
+				if (row_or_col)
+				{
+					sum += parseFloat(data[row[0]][i]);
+				}
+				else
+				{
+					sum += parseFloat(data[i][col[0]]);
+				}
+			}
+		
+			sum /= length;
+			out[1] = sum;
+			out[0] = self.skipWhitespace(cell_expression, cell_expression.length);
+			return out;
+		}
 		else
 		{
 			return out;
