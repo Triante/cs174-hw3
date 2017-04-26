@@ -22,7 +22,11 @@ class Header
     {
 		if ($type == "xml")
 		{
+<<<<<<< HEAD
 
+=======
+			header('Content-Type: text/xml');
+>>>>>>> 2d0257dddd39de5c46c8e15fcc2c485083dd3457
 		}
 		else
 		{}
