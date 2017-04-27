@@ -6,6 +6,8 @@ namespace jorgeandco\hw4\controllers;
 
 use jorgeandco\hw4\models as MODEL;
 use jorgeandco\hw4\views as VIEW;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 /**
 *	ApiController class for handling data passing from the views to the database
@@ -44,7 +46,7 @@ class ApiController
 	}
 
 	/**
-	*	Creates an emplty websheet and generates its 3 different hashes, then calls the Model to insert it in the database 
+	*	Creates an emplty websheet and generates its 3 different hashes, then calls the Model to insert it in the database
 		with the content provided
 	*	@param Array $name (the name of the new web sheet to be created and added to the database)
 	*/
@@ -96,6 +98,6 @@ class ApiController
 		$log->pushHandler(new StreamHandler('app_data/spread.log', Logger::INFO));
 
 		// add records to the log
-		$log->info($message);
+		$log->info($message."\n");
 	}
 }
