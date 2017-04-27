@@ -7,3 +7,4 @@ Description:
 
 Discussion:
 	Jorge: No luis. This is skeleton. No variables have been added yet.
+	Luis: Resolved

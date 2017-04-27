@@ -4,3 +4,5 @@ Description:
 	The current controller class 
 	needs to be separated into
 	ApiController and MainController
+
+	Luis: Resolved

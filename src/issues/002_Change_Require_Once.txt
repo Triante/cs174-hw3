@@ -6,3 +6,4 @@ Description:
 	autoloader from Composer.
 Discussion:
 	Jorge: required in index was for testing views
+	Luis: Resolved

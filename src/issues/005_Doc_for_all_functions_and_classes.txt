@@ -5,3 +5,5 @@ Description:
 	homework assignment need phpdoc
 	and or jsdoc. Check all the ones
 	that don't already have it.
+	
+	Luis: Resolved

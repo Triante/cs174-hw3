@@ -12,3 +12,5 @@ Discusion:
 	so i added the return statement becuase luis wanted to 
 	create an issue for a line that could have been changed
 	with adding 5 characters.
+	
+	Luis: Resolved
