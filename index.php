@@ -19,6 +19,7 @@ else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 else {
     $ip = $_SERVER['REMOTE_ADDR'];
 }
+
 //redirects the user to a websheet when entered through the URL
 if(isset($_REQUEST['arg1']))
 {

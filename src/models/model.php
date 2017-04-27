@@ -40,7 +40,7 @@ class Model
 	*/
 	private static function connect ($host, $username, $password, $database)
 	{
-		//creates a mySQL connection with the Note-a-List database
+		//creates a mySQL connection with the Web Sheets database
 		self::$db = new \mysqli($host, $username, $password, $database);
 
 		//checks if the database connection was successfull, if not echo error message

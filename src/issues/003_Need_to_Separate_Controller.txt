@@ -5,4 +5,4 @@ Description:
 	needs to be separated into
 	ApiController and MainController
 
-Luis: Issue Resolved
+	Luis: Resolved
