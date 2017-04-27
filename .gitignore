@@ -1,3 +1,6 @@
 /vendor
 /vendor/
-/appdata/spread.log
+/appdata/spread.lo
+/app_data
+/app_data/spread.log
+/src/configs/config.php

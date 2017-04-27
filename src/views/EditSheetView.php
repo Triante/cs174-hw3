@@ -41,15 +41,15 @@ class EditSheetView {
 		<body>
             <h1><a href="index.php">Web Sheets</a> : <?= $data['title'] ?></h1>
             <div>
-                <label for="edit_url">Edit URL:</label>
+                <label class="url_label" for="edit_url">Edit URL:</label>
                 <input id="edit_url" type="text" disabled="disabled" value="<?=CFG\Config::V_URL?>c=main&m=view&amp;arg1=<?= $data['codeE'] ?>"/>
             </div>
             <div>
-                <label for="read_url">Read URL:</label>
+                <label class="url_label" for="read_url">Read URL:</label>
                 <input id="read_url" type="text" disabled="disabled" value="<?=CFG\Config::V_URL?>c=main&m=view&amp;arg1=<?= $data['codeR'] ?>"/>
             </div>
             <div>
-                <label for="file_url">File URL:</label>
+                <label class="url_label" for="file_url">File URL:</label>
                 <input id="file_url" type="text" disabled="disabled" value="<?=CFG\Config::V_URL?>c=main&m=view&amp;arg1=<?= $data['codeF'] ?>"/>
             </div>
             <div id="spreadsheet_edit"></div>

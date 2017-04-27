@@ -8,7 +8,17 @@ namespace jorgeandco\hw4;
 require_once('vendor//autoload.php');
 use jorgeandco\hw4\controllers as CTV;
 
-$ip = $_SERVER['REMOTE_ADDR'];
+//Fun stuff (IP) to use for logging in Monolog
+$ip = "";
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+}
+else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+}
+else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
 
 //redirects the user to a websheet when entered through the URL
 if(isset($_REQUEST['arg1']))
