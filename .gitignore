@@ -4,3 +4,7 @@
 /app_data
 /app_data/spread.log
 /src/configs/config.php
+app_data
+app_data/
+app_data/spread.log
+src/configs/config.php

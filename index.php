@@ -48,7 +48,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 		{
 			$data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
             //ApiController used for  storing data in the database and not redirecting the user to another page
-			$class = new CTV\ApiController();
+			$class = new CTV\ApiController($ip);
 			$class->$method($data, $method);
 		}
         //redirects to landing page if 'm' is set improperly
@@ -71,7 +71,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 			if($class->$method($data))
 			{
                 //ApiController used for creating a new web sheet in the database and not redirecting the user to another page
-				$class2 = new CTV\ApiController();
+				$class2 = new CTV\ApiController($ip);
 				$method2 = 'insert';
                 //inserts new sheet in database
 				$class2->$method2($_POST['name']);
