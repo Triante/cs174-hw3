@@ -27,10 +27,10 @@ class Model
 		{
 			self::connect($hostname, CFG\Config::user, CFG\Config::password, CFG\Config::db);
 		}
-        //echo '<script>console.log("Enters Model Construct")</script>';
 
 	}
 
+	
 	/**
 	*	Connects to a database based on the variables passed
 	*	@param String $host (the name of the host where the database is hosted)
