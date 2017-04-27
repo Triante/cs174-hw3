@@ -379,6 +379,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         var width = data[0].length;
         if (row >= 0 && column >= 0) {
             var new_value = data[row][column];
+			
 			if (new_value == event.target.innerHTML)
 			{
 				return;
@@ -469,34 +470,30 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 		var row = event.target.parentElement.rowIndex - 1;
 		var column = event.target.cellIndex - 1;
 		
-		if (!event.target.innerHTML.includes('+') && !event.target.innerHTML.includes('-'))
+
+		if(data[row][column].charAt(0) == "=")
 		{
-			if(data[row][column].charAt(0) == "=")
+			var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
+			if(cell != event.target.innerHTML)
 			{
-				var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
-				if(cell != event.target.innerHTML)
-				{
-					data[row][column] = event.target.innerHTML;
-					data_elt = document.getElementById(self.data_id);
-					data_elt.value = JSON.stringify(data);
-					self.draw();
-					self.storeDataAsJSONString();
-				}
-			}
-			else
-			{
-				if(data[row][column] != event.target.innerHTML)
-				{
-					data[row][column] = event.target.innerHTML;
-					data_elt = document.getElementById(self.data_id);
-					data_elt.value = JSON.stringify(data);
-					self.draw();
-					self.storeDataAsJSONString();
-				}
+				data[row][column] = event.target.innerHTML;
+				data_elt = document.getElementById(self.data_id);
+				data_elt.value = JSON.stringify(data);
+				self.draw();
+				self.storeDataAsJSONString();
 			}
 		}
-		event.stopPropagation();
-		event.preventDefault();
+		else
+		{
+			if(data[row][column] != event.target.innerHTML)
+			{
+				data[row][column] = event.target.innerHTML;
+				data_elt = document.getElementById(self.data_id);
+				data_elt.value = JSON.stringify(data);
+				self.draw();
+				self.storeDataAsJSONString();
+			}
+		}
 	}
 
     if (this.mode == 'write') {
