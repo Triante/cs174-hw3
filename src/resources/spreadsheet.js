@@ -141,7 +141,6 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 	  if(cell_expression.substring(location+1, location+4) == "vg(")
 	  {
 			var value = cell_expression.substring(location+4);
-			console.log(value);
 			var a = value.split(":");
 			if(a.length != 2)
 			{
@@ -470,7 +469,8 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 		var row = event.target.parentElement.rowIndex - 1;
 		var column = event.target.cellIndex - 1;
 		
-
+		if (!event.target.innerHTML.includes("<button>+</button>") && !event.target.innerHTML.includes("<button>-</button>"))
+		{
 		if(data[row][column].charAt(0) == "=")
 		{
 			var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
@@ -493,6 +493,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 				self.draw();
 				self.storeDataAsJSONString();
 			}
+		}
 		}
 	}
 
