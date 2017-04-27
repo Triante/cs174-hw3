@@ -6,3 +6,9 @@ Description:
 	database. Even if a new 
 	spreadsheet is created, the
 	view does not show up.
+
+Discusion:
+	Jorge: Luis was too lazy to add a return statement, 
+	so i added the return statement becuase luis wanted to 
+	create an issue for a line that could have been changed
+	with adding 5 characters.
