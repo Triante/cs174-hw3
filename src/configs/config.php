@@ -6,7 +6,7 @@ namespace jorgeandco\hw4;
 
 /**
 * Class implementation to contain the the contants for initializing the
-* Note-A-List database.
+* Web Sheet's database.
 */
 class Config
 {
