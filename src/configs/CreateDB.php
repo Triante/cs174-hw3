@@ -7,7 +7,7 @@ namespace jorgeandco\hw4;
 require_once("Config.php");
 
 /**
-  Script to create and initialize the database for Note-A-List
+  Script to create and initialize the database for Web Sheets
 */
 $hostname = Config::host.":".Config::port;
 
@@ -22,10 +22,10 @@ if ($db->connect_error)
 
 echo "connection success\n";
 
-//string query to create the database for Note-A-List
+//string query to create the database for Web Sheets
 $dbcreate = 'CREATE DATABASE IF NOT EXISTS '.Config::db;
 
-//checks if creating the Note-A-List database was successful
+//checks if creating the Web Sheets database was successful
 if ($db->query($dbcreate) === true)
 {
 	echo Config::db." created\n";

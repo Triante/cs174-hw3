@@ -374,6 +374,10 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         var width = data[0].length;
         if (row >= 0 && column >= 0) {
             var new_value = data[row][column];
+			if (new_value == event.target.innerHTML)
+			{
+				return;
+			}
             if (new_value != null) {
                 data[row][column] = new_value;
                 data_elt = document.getElementById(self.data_id);
@@ -424,6 +428,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         }
         event.stopPropagation();
         event.preventDefault();
+		
     }
 
     p.storeDataAsJSONString = function(sheet_id) {
@@ -443,6 +448,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 
 	p.evaluate = function(event)
 	{
+		
 		var row = event.target.parentElement.rowIndex - 1;
 		var column = event.target.cellIndex - 1;
 		
@@ -472,6 +478,8 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 				}
 			}
 		}
+		event.stopPropagation();
+		event.preventDefault();
 	}
 
     if (this.mode == 'write') {
