@@ -56,6 +56,7 @@ class MainController
 					//retrieves websheet data based on name or hashcode provided
 					$data = $this->model->read($code['sheet']);
 					//if a websheet exists, then render sheet based on its code type (r: read, e: edit, f: file)
+
 					if (!empty($data))
 					{
 						$bleh['title'] = $data['title'];

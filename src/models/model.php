@@ -30,6 +30,7 @@ class Model
 
 	}
 
+	
 	/**
 	*	Connects to a database based on the variables passed
 	*	@param String $host (the name of the host where the database is hosted)
