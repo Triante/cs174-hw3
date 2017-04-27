@@ -40,10 +40,6 @@ else
 
 /**
   array to hold all the queries to create and initalize the database
-    1. creates table list(list_id, list_name)
-    2. creates table list_relationship(parent_id, list_id)
-    3. creates table note(note_id, note_name, note_date, note_description)
-    4. inserts Note-A_list as first list to set as list_id = 1 to initiate as root list
 */
 $dbtables = ["CREATE TABLE `sheet` (`sheet_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `sheet_name` VARCHAR(100) NOT NULL, `sheet_data` VARCHAR(100000000) NOT NULL, PRIMARY KEY (`sheet_id`));",
     "CREATE TABLE `sheet_codes` (`sheet_id` INT UNSIGNED NOT NULL, `hash_code` VARCHAR(8) NOT NULL, `code_type` VARCHAR(1) NOT NULL, CONSTRAINT sheet_fk FOREIGN KEY (`sheet_id`) REFERENCES `sheet`(`sheet_id`) ON UPDATE CASCADE ON DELETE CASCADE);"];

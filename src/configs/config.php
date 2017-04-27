@@ -6,8 +6,9 @@ namespace jorgeandco\hw4;
 
 /**
 * Class implementation to contain the the contants for initializing the
-* Web Sheets database.
+* Web Sheet's database.
 */
+
 class Config
 {
 	const user = 'root';
@@ -18,5 +19,5 @@ class Config
 
 	const location = 'America/Los_Angeles';
 	const V_URL = 'localhost/cs174/cs174-hw3/index.php?';
-	
+
 }
