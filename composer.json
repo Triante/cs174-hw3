@@ -14,5 +14,5 @@
 		"psr-4": {
 			"jorgeandco\\hw4\\":"src/"
 		}
-  }
+	}
 }

@@ -4,7 +4,8 @@
 */
 namespace jorgeandco\hw4;
 
-require_once('Config.php');
+require_once("Config.php");
+
 /**
   Script to create and initialize the database for Note-A-List
 */

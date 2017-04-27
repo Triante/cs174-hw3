@@ -28,7 +28,6 @@ class MainController
 					break;
 				case "read":
 						$data = $this->model->read($code['sheet']);
-
 					if (!empty($data))
 					{
 						$bleh['title'] = $data['title'];
@@ -62,7 +61,7 @@ class MainController
 						{
 							return true;
 						}
-						echo "<div>bad Luis</div>";
+						return false;
 					}
 				break;
 				default:

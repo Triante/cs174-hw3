@@ -6,7 +6,7 @@ namespace jorgeandco\hw4;
 
 /**
 * Class implementation to contain the the contants for initializing the
-* Note-A-List database.
+* Web Sheets database.
 */
 class Config
 {
@@ -18,4 +18,5 @@ class Config
 
 	const location = 'America/Los_Angeles';
 	const V_URL = 'localhost/cs174/cs174-hw3/index.php?';
+	
 }

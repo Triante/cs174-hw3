@@ -25,7 +25,6 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 {
 	if (isset($_POST['json']) && isset($_POST['id']))
 	{
-		echo "in here";
 		$method = $_REQUEST['m'];
 		if($method == "update")
 		{
@@ -47,10 +46,9 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
 			$data = ['sheet'=>$_POST['name'], 'page'=>'read', 'create'=>true];
 			if($class->$method($data))
 			{
-				$class2 = new CTV\ApiController();
-				$method2 = 'insert';
-				$class2->$method2($_POST['name']);
-				$class->$method($data);
+				//$class2 = new CTV\ApiController();
+				//$method2 = 'insert';
+				//$class2->$method2($_POST['name']);
 			}
 		}
 		else
