@@ -19,7 +19,8 @@ class MainController
 	private $user;
 
 	/**
-	*	Contructor for MainController, handles passing data from the model to either the read, edit, or file pages for rendering. Also used to call the landing view to load
+	*	Contructor for MainController, handles passing data from the model to either the read, edit, 
+	*   or file pages for rendering. Also used to call the landing view to load
 	*	@param String $ip (The IP of the user navigating through WebSheets)
 	*/
 	public function __construct($ip)
@@ -40,6 +41,7 @@ class MainController
 	*/
 	public function view($code)
 	{
+		$ip = $this->user;
 		//cecks of a page is set to be rendered
 		if (isset($code['page']))
 		{

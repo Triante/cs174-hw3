@@ -63,6 +63,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
             this[property_key] = property_defaults[property_key];
         }
     }
+	
     /**
      * Main function used to draw the spreadsheet with the container tag
      */
@@ -298,6 +299,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         }
         return out;
     }
+	
     /**
      * Returns the position of the first non-whitespace character after
      * location in the string (returns location if location is non-WS or
@@ -315,6 +317,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         }
         return location;
     }
+	
     /**
      * Converts a decimal number to a base 26 number string using A-Z for 0-25.
      * Used where drawing column headers for spreadsheet
@@ -332,6 +335,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         } while (number > 25);
         return out;
     }
+	
     /**
      * Given a cell name string, such as B4, converts it to an ordered pair
      * suitable for lookup in the spreadsheets data array. On B4,
@@ -356,6 +360,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         }
         return [parseInt(cell_parts[2]), column];
     }
+	
     /**
      * Callback for click events on spreadsheet. Determines if the event
      * occurred on a spreadsheet cell. If so, it opens a prompt for a
@@ -431,6 +436,11 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 		
     }
 
+	/**
+	* Function to send updated data on the spreadsheet to the server in order to update it
+	* on the database.
+	* @param sheed_id (the id of the sheet being edited)
+	*/
     p.storeDataAsJSONString = function(sheet_id) {
         var JSONString = JSON.stringify(data);
         var request = new XMLHttpRequest();
@@ -446,6 +456,13 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
         request.send(params);
     }
 
+	/**
+	* Handler function for the onBlur action. Whenever the user clicks away from the current cell,
+	* the cell that was just edited is evaluated and stored into the matrix holding all the 
+	* spreadsheet values.
+	*
+	* @param event (the event that occurred or the cell that the user just left)
+	*/
 	p.evaluate = function(event)
 	{
 		

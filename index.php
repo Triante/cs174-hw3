@@ -9,6 +9,7 @@ require_once('vendor//autoload.php');
 use jorgeandco\hw4\controllers as CTV;
 
 $ip = $_SERVER['REMOTE_ADDR'];
+
 //redirects the user to a websheet when entered through the URL
 if(isset($_REQUEST['arg1']))
 {

@@ -8,7 +8,7 @@ use jorgeandco\hw4\models as MODEL;
 use jorgeandco\hw4\views as VIEW;
 
 /**
-*	MainController class for handling data passing for the views to the model for update only
+*	ApiController class for handling data passing from the views to the database
 */
 class ApiController
 {
@@ -19,7 +19,7 @@ class ApiController
 
 	/**
 	*	Contructor for ApiController, handles passing data from the view to the model when inserting a new web sheet
-	*	or updating an esisting web sheet in the background with redirecting users to other pages.
+	*	or updating an existing web sheet in the background.
 	*	@param String $ip (The IP of the user navigating through WebSheets)
 	*/
 	public function __construct($ip)
@@ -31,23 +31,26 @@ class ApiController
 
 	/**
 	*	Calls the Model to update a websheet with content provided
-	*	@param array $data (Array with the variables neede to load a web sheet and page
+	*	@param array $data (Array with the variables needed to load a web sheet and page
 	*					Array contents:	$data['id'] the id of the sheet to be updated, not its hashcode
 	*								$data['json'] the new data for the update)
 	*	@param String $operation (the type of update to be called, should 'update' to update the database)
 	*/
 	public function update($data, $operation)
 	{
+		$ip = $this->user;
 		$this->model->update($data, $operation);
 		$this->monologWrite($ip.": editted the sheet ".$data["id"]);
 	}
 
 	/**
-	*	Creates an emplty websheet and generates its 3 different hashses, then calls the Model to insert it in the database with the content provided
+	*	Creates an emplty websheet and generates its 3 different hashes, then calls the Model to insert it in the database 
+		with the content provided
 	*	@param Array $name (the name of the new web sheet to be created and added to the database)
 	*/
 	public function insert($name)
 	{
+		$ip = $this->user;
 		self::$hasher = random_int(0,100000000);
 		while (true)
 		{
