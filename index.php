@@ -46,6 +46,7 @@ else if(isset($_REQUEST['m']) && isset($_REQUEST['c']))
         //used to verify that the the data passed is only being used to update a database
 		if($method == "update")
 		{
+			echo "<script>console.log(".$_POST['json'].");</script>";
 			$data = ['json'=>$_POST["json"], 'id'=>$_POST["id"]];
             //ApiController used for  storing data in the database and not redirecting the user to another page
 			$class = new CTV\ApiController($ip);

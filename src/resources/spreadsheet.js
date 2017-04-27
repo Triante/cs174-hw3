@@ -286,7 +286,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
             out[0] = self.skipWhitespace(cell_expression,location +
                 value[0].length +1);
             out[1] = (value[0].match(/\./) == '.') ? parseFloat(value[0]) :
-                parseInt(value[0]);
+                parseFloat(value[0]);
             return out;
         }
         value = rest.match(/^[A-Z]+\d+/);
@@ -295,6 +295,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
                 value.length + 1);
             var row_col = self.cellNameAsRowColumn(value.toString().trim());
             out[1] = data[row_col[0] - 1][row_col[1]];
+			out[1] = parseFloat(out[1]);
         }
         return out;
     }
@@ -442,7 +443,7 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 	* @param sheed_id (the id of the sheet being edited)
 	*/
     p.storeDataAsJSONString = function(sheet_id) {
-        var JSONString = JSON.stringify(data);
+        var JSONString = JSON.stringify(data).replace('+', '%2b');
         var request = new XMLHttpRequest();
         request.open("POST", "index.php?c=api&m=update", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -469,31 +470,32 @@ function Spreadsheet(current_sheet_id ,spreadsheet_id, supplied_data)
 		var row = event.target.parentElement.rowIndex - 1;
 		var column = event.target.cellIndex - 1;
 		
-		if (!event.target.innerHTML.includes("<button>+</button>") && !event.target.innerHTML.includes("<button>-</button>"))
+		console.log(event.target.innerHTML);
+		if (event.target.innerHTML != "+" && event.target.innerHTML != "-")
 		{
-		if(data[row][column].charAt(0) == "=")
-		{
-			var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
-			if(cell != event.target.innerHTML)
+			if(data[row][column].charAt(0) == "=")
 			{
-				data[row][column] = event.target.innerHTML;
-				data_elt = document.getElementById(self.data_id);
-				data_elt.value = JSON.stringify(data);
-				self.draw();
-				self.storeDataAsJSONString();
+				var cell = self.evaluateCell(data[row][column].substring(1), 0)[1];
+				if(cell != event.target.innerHTML)
+				{
+					data[row][column] = event.target.innerHTML;
+					data_elt = document.getElementById(self.data_id);
+					data_elt.value = JSON.stringify(data);
+					self.draw();
+					self.storeDataAsJSONString();
+				}
 			}
-		}
-		else
-		{
-			if(data[row][column] != event.target.innerHTML)
+			else
 			{
-				data[row][column] = event.target.innerHTML;
-				data_elt = document.getElementById(self.data_id);
-				data_elt.value = JSON.stringify(data);
-				self.draw();
-				self.storeDataAsJSONString();
+				if(data[row][column] != event.target.innerHTML)
+				{
+					data[row][column] = event.target.innerHTML;
+					data_elt = document.getElementById(self.data_id);
+					data_elt.value = JSON.stringify(data);
+					self.draw();
+					self.storeDataAsJSONString();
+				}
 			}
-		}
 		}
 	}
 
