@@ -39,7 +39,7 @@ class ApiController
 	public function update($data, $operation)
 	{
 		$this->model->update($data, $operation);
-		$this->monologWrite($ip.": editted the sheet ".$data["id"]);
+		$this->monologWrite($this->user.": editted the sheet ".$data["id"]);
 	}
 
 	/**
@@ -80,7 +80,7 @@ class ApiController
 		$data = ["title"=>$name, "json"=>$json, "codeE"=>$edithash, "codeR"=>$readhash, "codeF"=>$filehash];
 		//call Model to insert new websheet into databse
 		$this->model->update($data, "insert");
-		$this->monologWrite($ip.": created new sheet ".$data["title"]);
+		$this->monologWrite($this->user.": created new sheet ".$data["title"]);
 	}
 
 	/**

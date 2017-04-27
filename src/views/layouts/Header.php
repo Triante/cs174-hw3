@@ -35,12 +35,13 @@ class Header
 		}
 		else
 		{
-				$styleDir = 'src/styles/styles.css';
+			$styleDir = 'src/styles/styles.css';
 			?>
 				<!DOCTYPE html>
 				<html>
 					<head>
 						<title>CS174 HW4 Datasheets</title>
+                        <link rel="stylesheet" type="text/css" href="<?=$styleDir;?>" />
 						<?php
                             //load script if needed
 							if ($this->hasScript) {

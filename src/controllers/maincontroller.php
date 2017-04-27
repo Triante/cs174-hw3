@@ -48,7 +48,7 @@ class MainController
 			{
 				//case home: calls helper method to render the landing view page
 				case "home":
-					$this->monologWrite("User ".$ip." entered landing page");
+					$this->monologWrite("User ".$this->user." entered landing page");
 					$this->home();
 					break;
 				// case read: retrives websheet from the database and calls a helper method to render the read, edit, or file page
@@ -71,17 +71,17 @@ class MainController
 						{
 							//if type id 'r', calls helper method to render sheet view for read only
 							case "r":
-								$this->monologWrite($ip.": entered read page for sheet".$bleh['codeR']);
+								$this->monologWrite($this->user.": entered read page for sheet".$bleh['codeR']);
 								$this->sheetView($bleh);
 							break;
 							//if type id 'e', calls helper method to render sheet view for edit mode
 							case "e":
-								$this->monologWrite($ip.": entered edit page for sheet".$bleh['codeE']);
+								$this->monologWrite($this->user.": entered edit page for sheet".$bleh['codeE']);
 								$this->editView($bleh);
 							break;
 							//if type id 'f', calls helper method to render file as XML in browser
 							case "f":
-								$this->monologWrite($ip.": accessed file ".$bleh['codeF']);
+								$this->monologWrite($this->user.": accessed file ".$bleh['codeF']);
 								$bleh['json'] = json_decode($bleh['json']);
 								$this->xmlView($bleh);
 							break;
